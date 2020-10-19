@@ -1,4 +1,3 @@
-
 /**
  * Starts the application
  * This is the function that is run when the app starts
@@ -9,7 +8,7 @@
  * @param  {string} name the name of the app
  * @returns {void}
  */
-function startApp(name){
+function startApp(name) {
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
   process.stdin.on('data', onDataReceived);
@@ -36,11 +35,9 @@ function startApp(name){
 function onDataReceived(text) {
   if (text === 'quit\n') {
     quit();
-  }
-  else if(text === 'hello\n'){
+  } else if (text === 'hello\n') {
     hello();
-  }
-  else{
+  } else {
     unknownCommand(text);
   }
 }
@@ -53,8 +50,8 @@ function onDataReceived(text) {
  * @param  {string} c the text received
  * @returns {void}
  */
-function unknownCommand(c){
-  console.log('unknown command: "'+c.trim()+'"')
+function unknownCommand(c) {
+  console.log('unknown command: "' + c.trim() + '"')
 }
 
 
@@ -63,7 +60,7 @@ function unknownCommand(c){
  *
  * @returns {void}
  */
-function hello(){
+function hello() {
   console.log('hello!')
 }
 
@@ -73,10 +70,10 @@ function hello(){
  *
  * @returns {void}
  */
-function quit(){
+function quit() {
   console.log('Quitting now, goodbye!')
   process.exit();
 }
 
 // The following line starts the application
-startApp("Jad Sarout")
+startApp("Hussein Halloum")
