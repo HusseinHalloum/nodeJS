@@ -79,9 +79,15 @@ function quit() {
 }
 
 
+/**
+* List/Print out all possible commands
+*
+* @returns {void}
+*/
 function help() {
   console.log('1-hello\n2-quit or exit\n3-help')
 }
+
 
 // The following line starts the application
 startApp("Hussein Halloum")
