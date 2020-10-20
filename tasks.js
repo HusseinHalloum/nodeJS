@@ -1,3 +1,6 @@
+ let tasks = ['Write drafts of letters','Talk with parents','Collect ideas','Prepare emails','Set-up for meeting'];
+
+
 /**
  * Starts the application
  * This is the function that is run when the app starts
@@ -40,8 +43,10 @@ function onDataReceived(text) {
     hello(text[1]);
   } else if (text[0] === 'help'){
     help();
+  } else if(text[0] === 'list'){
+    listTasks();
   }
-    else {
+  else {
     unknownCommand(text);
   }
 }
@@ -92,6 +97,12 @@ function quit() {
 */
 function help() {
   console.log('1-hello, you can add your name too and it will shows "hello urname!"\n2-quit or exit\n3-help')
+}
+
+function listTasks(){
+  for(let i = 0; i<tasks.length; i++){
+    console.log(i+1 + '- ' + tasks[i]);
+  }
 }
 
 
