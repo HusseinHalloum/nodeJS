@@ -91,7 +91,7 @@ function quit() {
 * @returns {void}
 */
 function help() {
-  console.log('1-hello\n2-quit or exit\n3-help')
+  console.log('1-hello, you can add your name too and it will shows "hello urname!"\n2-quit or exit\n3-help')
 }
 
 
