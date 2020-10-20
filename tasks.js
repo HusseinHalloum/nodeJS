@@ -48,7 +48,7 @@ function onDataReceived(text) {
   } else if(text[0] === 'add'){
     addTask(text[1]);
   } else if(text[0] === 'remove'){
-    removeTask();
+    removeTask(text);
   }
   else {
     unknownCommand(text);
@@ -116,8 +116,14 @@ function addTask(text){
   else console.log('Error');
 }
 
-function removeTask(){
-  tasks.pop();
+
+function removeTask(text){
+  if (text == 'remove'){
+    tasks.pop();
+  } else {
+    tasks.splice(text[1],text[1]);
+  }
 }
+
 // The following line starts the application
 startApp("Hussein Halloum")
