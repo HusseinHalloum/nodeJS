@@ -75,6 +75,10 @@ function onDataReceived(text) {
     removeTask(text);
   } else if(text[0] == 'edit'){
     editTask(text);
+  } else if(text[0] == 'check'){
+    checkTask(text);
+  } else if(text[0] == 'uncheck'){
+    uncheckTask(text);
   }
   else {
     unknownCommand(text[0]);
@@ -167,14 +171,36 @@ function editTask(text){
     console.log('Error')
   }
   else if(text[1] < tasks.length+1 && text[1] > 0 && text[2] != null && text[2] != ""){
-    text.splice(0,3);
-    tasks.splice(replacedItem,1,{done: text[2], task: text});
+    text.splice(0,2);
+    tasks.splice(replacedItem,1,{done: false, task: text});
   } else  if (text[1] > tasks.length){
     console.log('There is no task no ' + text[1] + ' in this list')
   }
   else
   {
     tasks.splice(len,1,text[1]);
+  }
+}
+
+// Check Step
+function checkTask(text){
+  if (text == 'check'){
+    console.log('Error')
+  } else if (text[1] <= tasks.length && text[1] > 0){
+    tasks[text[1]-1].done = true;
+  } else {
+    console.log('There is no task with this number ' + text[1])
+  }
+}
+
+// Uncheck Step
+function uncheckTask(text){
+  if (text == 'uncheck'){
+    console.log('Error')
+  } else if (text[1] <= tasks.length && text[1] > 0){
+    tasks[text[1]-1].done = false;
+  } else {
+    console.log('There is no task with this number ' + text[1])
   }
 }
 
