@@ -1,4 +1,28 @@
- let tasks = ['Write drafts of letters','Talk with parents','Collect ideas','Prepare emails','Set-up for meeting'];
+ let tasks = [
+   {
+     done : true,
+    'task': 'Write drafts of letters'
+  },
+  {
+    done: false,
+    'task': 'Talk with parents'
+  },
+  {
+    done: true, 
+    'task': 'Collect ideas'
+  },
+  {done: false, 
+    'task': 'Prepare emails'
+  },
+  {
+    done: true, 
+    'task': 'Set-up for meeting'
+  },
+  {
+    done: false, 
+    'task' : "collaboration"
+  }
+];
 
 
 /**
@@ -103,18 +127,22 @@ function quit() {
 * @returns {void}
 */
 function help() {
-  console.log('1- hello, you can add your name too and it will shows "hello urname!"\n2- quit or exit\n3- help\n4- list\n5- add\n6- remove\n7-edit')
+  console.log('1- hello, you can add your name too and it will shows "hello urname!"\n2- quit or exit\n3- help\n4- list\n5- add\n6- remove\n7- edit')
 }
 
 function listTasks(){
   for(let i = 0; i<tasks.length; i++){
-    console.log(i+1 + '- ' + tasks[i]);
+    if (tasks[i].done == true){
+    console.log(i+1 + '- [\u2713] '+ tasks[i].task);
+    } else {
+    console.log(i+1 + '- [] '+ tasks[i].task);
+    }
   }
 }
 
 function addTask(text){
   if(text){
-  tasks.push(text);
+  tasks.push({done: false, task: text});
   }
   else console.log('Error');
 }
@@ -126,11 +154,7 @@ function removeTask(text){
   } else if (text[1] > tasks.length || text[1]< 1 ){
     console.log('You entered a number that doesn\'t exist');
   } else {
-    if (parseInt(text[1]-1) == 0){
       tasks.splice(parseInt(text[1])-1, 1);
-    } else {
-    tasks.splice(parseInt(text[1])-1, parseInt(text[1])-1);
-    }
   }
 }
 
@@ -143,8 +167,8 @@ function editTask(text){
     console.log('Error')
   }
   else if(text[1] < tasks.length+1 && text[1] > 0 && text[2] != null && text[2] != ""){
-    text.splice(0,2);
-    tasks.splice(replacedItem,1,text);
+    text.splice(0,3);
+    tasks.splice(replacedItem,1,{done: text[2], task: text});
   } else  if (text[1] > tasks.length){
     console.log('There is no task no ' + text[1] + ' in this list')
   }
