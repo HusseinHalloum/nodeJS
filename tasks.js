@@ -51,7 +51,7 @@ function onDataReceived(text) {
     removeTask(text);
   }
   else {
-    unknownCommand(text);
+    unknownCommand(text[0]);
   }
 }
 
@@ -63,6 +63,7 @@ function onDataReceived(text) {
  * @param  {string} c the text received
  * @returns {void}
  */
+
 function unknownCommand(c) {
   console.log('unknown command: "' + c.trim() + '"')
 }
@@ -120,8 +121,14 @@ function addTask(text){
 function removeTask(text){
   if (text == 'remove'){
     tasks.pop();
+  } else if (text[1] > tasks.length || text[1]< 1 ){
+    console.log('You entered a number that doesn\'t exist');
   } else {
-    tasks.splice(text[1],text[1]);
+    if (parseInt(text[1]-1) == 0){
+      tasks.splice(parseInt(text[1])-1, 1);
+    } else {
+    tasks.splice(parseInt(text[1])-1, parseInt(text[1])-1);
+    }
   }
 }
 
