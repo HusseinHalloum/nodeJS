@@ -49,6 +49,8 @@ function onDataReceived(text) {
     addTask(text[1]);
   } else if(text[0] === 'remove'){
     removeTask(text);
+  } else if(text[0] == 'edit'){
+    editTask(text);
   }
   else {
     unknownCommand(text[0]);
@@ -101,7 +103,7 @@ function quit() {
 * @returns {void}
 */
 function help() {
-  console.log('1- hello, you can add your name too and it will shows "hello urname!"\n2- quit or exit\n3- help\n4- list\n5- add\n6- remove')
+  console.log('1- hello, you can add your name too and it will shows "hello urname!"\n2- quit or exit\n3- help\n4- list\n5- add\n6- remove\n7-edit')
 }
 
 function listTasks(){
@@ -129,6 +131,26 @@ function removeTask(text){
     } else {
     tasks.splice(parseInt(text[1])-1, parseInt(text[1])-1);
     }
+  }
+}
+
+
+// Edit task
+function editTask(text){
+  let replacedItem = parseInt(text[1])-1;
+  let len = parseInt(tasks.length-1);
+  if (text == 'edit'){
+    console.log('Error')
+  }
+  else if(text[1] < tasks.length+1 && text[1] > 0 && text[2] != null && text[2] != ""){
+    text.splice(0,2);
+    tasks.splice(replacedItem,1,text);
+  } else  if (text[1] > tasks.length){
+    console.log('There is no task no ' + text[1] + ' in this list')
+  }
+  else
+  {
+    tasks.splice(len,1,text[1]);
   }
 }
 
