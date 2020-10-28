@@ -25,7 +25,9 @@
 ];
 */
 
-var tasks;
+var tasks = ["husssein","ali"];
+var fs = require('fs');
+var arg = process.argv;
 
 /**
  * Starts the application
@@ -46,13 +48,47 @@ function startApp(name) {
   
 }
 
-const fs = require('fs');
-fs.readFile('database.json', 'utf-8', (err, data) => {
-  if (err) {
-      throw err;
+if(arg[2] != undefined ){
+  try{
+    if(fs.existsSync(arg[2])){
+      var newData = arg[2] 
+    }
+    else{
+      var newData = arg[2];
+      var Data = JSON.stringify([]);
+      fs.writeFileSync(newData, Data, (err) => {
+        if(err){
+          throw err;
+        }
+        console.log("JSON data is saved")
+       });
+    }
   }
-  tasks = JSON.parse(data.toString());
-});
+  catch(err){
+    console.log('Error');
+  }
+} else {
+  try{
+    if(fs.existsSync("database.json")){
+      var newData = "database.json";
+    }else{
+      var newData = "database.json";
+      var Data = JSON.stringify([]);
+      fs.writeFileSync(newData, Data , (err) => {
+        if (err){
+           throw err;
+        }
+        console.log("JSON data is saved")
+      });
+    }
+  }catch(err){
+    console.log("Error")
+  }
+}
+
+var data = fs.readFileSync(newData);
+tasks = JSON.parse(data);
+
 /**
  * Decides what to do depending on the data that was received
  * This function receives the input sent by the user.
@@ -129,18 +165,16 @@ function hello(text) {
  * @returns {void}
  */
 function quit() {
-  const fs = require('fs');
   const data = JSON.stringify(tasks);
-  fs.writeFileSync('database.json', data, (err) => {
+  fs.writeFileSync(newData, data,'utf-8', (err) => {
   if (err) {
       throw err;
     }
-  });
-  console.log("JSON data is saved.");
+});
+  console.log("JSON data is saved");
   console.log('Quitting now, goodbye!')
   process.exit();
 }
-
 
 /**
 * List/Print out all possible commands
