@@ -25,6 +25,7 @@
 ];
 
 
+
 /**
  * Starts the application
  * This is the function that is run when the app starts
@@ -36,11 +37,20 @@
  * @returns {void}
  */
 function startApp(name) {
+  const fs = require('fs');
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
   process.stdin.on('data', onDataReceived);
+  fs.readFile('database.json', 'utf-8', (err, data) => {
+    if (err) {
+        throw err;
+    }
+    const tasks = JSON.parse(data.toString());
+    console.log(tasks);
+  });
   console.log(`Welcome to ${name}'s application!`)
   console.log("--------------------")
+  
 }
 
 
@@ -120,6 +130,14 @@ function hello(text) {
  * @returns {void}
  */
 function quit() {
+  const fs = require('fs');
+  const data = JSON.stringify(tasks);
+  fs.writeFileSync('database.json', data, (err) => {
+  if (err) {
+      throw err;
+    }
+  });
+  console.log("JSON data is saved.");
   console.log('Quitting now, goodbye!')
   process.exit();
 }
@@ -178,7 +196,7 @@ function editTask(text){
   }
   else
   {
-    tasks.splice(len,1,text[1]);
+    tasks.splice(len,1,{done: false, task: text[1]});
   }
 }
 
