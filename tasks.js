@@ -1,4 +1,4 @@
- let tasks = [
+ /* let tasks = [
    {
      done : true,
     'task': 'Write drafts of letters'
@@ -23,8 +23,9 @@
     'task' : "collaboration"
   }
 ];
+*/
 
-
+var tasks;
 
 /**
  * Starts the application
@@ -37,23 +38,21 @@
  * @returns {void}
  */
 function startApp(name) {
-  const fs = require('fs');
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
   process.stdin.on('data', onDataReceived);
-  fs.readFile('database.json', 'utf-8', (err, data) => {
-    if (err) {
-        throw err;
-    }
-    const tasks = JSON.parse(data.toString());
-    console.log(tasks);
-  });
   console.log(`Welcome to ${name}'s application!`)
   console.log("--------------------")
   
 }
 
-
+const fs = require('fs');
+fs.readFile('database.json', 'utf-8', (err, data) => {
+  if (err) {
+      throw err;
+  }
+  tasks = JSON.parse(data.toString());
+});
 /**
  * Decides what to do depending on the data that was received
  * This function receives the input sent by the user.
